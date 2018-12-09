@@ -41,7 +41,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(555, 317);
+            this.tabControl1.Size = new System.Drawing.Size(555, 381);
             this.tabControl1.TabIndex = 0;
             // 
             // productsTab
@@ -60,7 +60,7 @@
             this.storesTab.Location = new System.Drawing.Point(4, 22);
             this.storesTab.Name = "storesTab";
             this.storesTab.Padding = new System.Windows.Forms.Padding(3);
-            this.storesTab.Size = new System.Drawing.Size(547, 291);
+            this.storesTab.Size = new System.Drawing.Size(547, 355);
             this.storesTab.TabIndex = 1;
             this.storesTab.Text = "Stores";
             this.storesTab.UseVisualStyleBackColor = true;
