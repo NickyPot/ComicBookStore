@@ -4,6 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
+using System.Data.SqlClient;
+using System.Data.SqlTypes;
+
 namespace ComicBookStore
 {
     static class Program
@@ -19,4 +23,6 @@ namespace ComicBookStore
             Application.Run(new mainForm());
         }
     }
+
+    
 }

@@ -38,16 +38,8 @@ namespace ComicBookStore
 
         private void button1_Click(object sender, EventArgs e)
         {
-            SqlConnection conn;
-            string connString = "Data Source =tolmount.abertay.ac.uk; Initial Catalog =sql1704807; User ID = sql1704807; Password =2h19%7nE";
-
-            conn = new SqlConnection(connString);
-            conn.Open();
-
-            SqlDataAdapter dA = new SqlDataAdapter("select * from product", conn);
-            DataTable dataTable = new DataTable();
-            dA.Fill(dataTable);
-            productList.DataSource = dataTable;
+            string query = "select * from product";
+            productList.DataSource = searchResult.nPBindtoGridview(query);
 
 
             

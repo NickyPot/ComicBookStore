@@ -15,7 +15,17 @@ using System.Data.SqlTypes;
 namespace ComicBookStore
 {
     public partial class Form1 : Form
+
     {
+
+        private static string _customerId;
+        public static string customerId {
+            get { return _customerId; }
+            set { _customerId = customerId; }
+
+        }
+
+
         public Form1()
         {
             InitializeComponent();
@@ -83,6 +93,7 @@ namespace ComicBookStore
                         staff++;
                     }
 
+                    data1.Close();
                     if (staff == 1)
                     {
                         //if it comes here it means they are staff
@@ -92,8 +103,22 @@ namespace ComicBookStore
 
                     else {
                         //if it comes here it means they are a customer
+                        string selectUserId = "select personID from account where email = '" + emailTextBox.Text + "'";
+
+                        SqlCommand userIdCommand = new SqlCommand(selectUserId);
+
+                        userIdCommand.Connection = conn;
+
+                        SqlDataReader userIdData = userIdCommand.ExecuteReader();
+                        userIdData.Read();
+                        _customerId = userIdData[0].ToString();
+                       
+                       // MessageBox.Show(userIdData[0].ToString());
+
                         customerPage customerPage = new customerPage();
-                        customerPage.Show(); }
+                        customerPage.Show();
+
+                    }
 
                     }
 
