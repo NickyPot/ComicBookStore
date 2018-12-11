@@ -40,11 +40,19 @@
             this.profileTab = new System.Windows.Forms.TabPage();
             this.cartTab = new System.Windows.Forms.TabPage();
             this.button3 = new System.Windows.Forms.Button();
+            this.updateCartButton = new System.Windows.Forms.Button();
+            this.cartDataGridView = new System.Windows.Forms.DataGridView();
+            this.removeItemButton = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.purchaseButton = new System.Windows.Forms.Button();
+            this.fastDeliveryCheckBox = new System.Windows.Forms.CheckBox();
+            this.normalDeliveryCheckBox = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.productsTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.productSearchListGridView)).BeginInit();
             this.storesTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.shopListGridView)).BeginInit();
+            this.cartTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cartDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -153,6 +161,11 @@
             // 
             // cartTab
             // 
+            this.cartTab.Controls.Add(this.normalDeliveryCheckBox);
+            this.cartTab.Controls.Add(this.fastDeliveryCheckBox);
+            this.cartTab.Controls.Add(this.purchaseButton);
+            this.cartTab.Controls.Add(this.cartDataGridView);
+            this.cartTab.Controls.Add(this.updateCartButton);
             this.cartTab.Location = new System.Drawing.Point(4, 22);
             this.cartTab.Name = "cartTab";
             this.cartTab.Padding = new System.Windows.Forms.Padding(3);
@@ -171,6 +184,66 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // updateCartButton
+            // 
+            this.updateCartButton.Location = new System.Drawing.Point(452, 254);
+            this.updateCartButton.Name = "updateCartButton";
+            this.updateCartButton.Size = new System.Drawing.Size(89, 48);
+            this.updateCartButton.TabIndex = 0;
+            this.updateCartButton.Text = "Update Cart";
+            this.updateCartButton.UseVisualStyleBackColor = true;
+            this.updateCartButton.Click += new System.EventHandler(this.updateCartButton_Click);
+            // 
+            // cartDataGridView
+            // 
+            this.cartDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.cartDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.removeItemButton});
+            this.cartDataGridView.Location = new System.Drawing.Point(6, 6);
+            this.cartDataGridView.Name = "cartDataGridView";
+            this.cartDataGridView.ReadOnly = true;
+            this.cartDataGridView.Size = new System.Drawing.Size(535, 161);
+            this.cartDataGridView.TabIndex = 1;
+            this.cartDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.cartDataGridView_CellContentClick);
+            // 
+            // removeItemButton
+            // 
+            this.removeItemButton.HeaderText = "";
+            this.removeItemButton.Name = "removeItemButton";
+            this.removeItemButton.ReadOnly = true;
+            this.removeItemButton.Text = "Remove Item";
+            this.removeItemButton.UseColumnTextForButtonValue = true;
+            // 
+            // purchaseButton
+            // 
+            this.purchaseButton.Location = new System.Drawing.Point(347, 254);
+            this.purchaseButton.Name = "purchaseButton";
+            this.purchaseButton.Size = new System.Drawing.Size(99, 48);
+            this.purchaseButton.TabIndex = 2;
+            this.purchaseButton.Text = "Purchase";
+            this.purchaseButton.UseVisualStyleBackColor = true;
+            this.purchaseButton.Click += new System.EventHandler(this.purchaseButton_Click);
+            // 
+            // fastDeliveryCheckBox
+            // 
+            this.fastDeliveryCheckBox.AutoSize = true;
+            this.fastDeliveryCheckBox.Location = new System.Drawing.Point(204, 254);
+            this.fastDeliveryCheckBox.Name = "fastDeliveryCheckBox";
+            this.fastDeliveryCheckBox.Size = new System.Drawing.Size(87, 17);
+            this.fastDeliveryCheckBox.TabIndex = 3;
+            this.fastDeliveryCheckBox.Text = "Fast Delivery";
+            this.fastDeliveryCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // normalDeliveryCheckBox
+            // 
+            this.normalDeliveryCheckBox.AutoSize = true;
+            this.normalDeliveryCheckBox.Location = new System.Drawing.Point(204, 284);
+            this.normalDeliveryCheckBox.Name = "normalDeliveryCheckBox";
+            this.normalDeliveryCheckBox.Size = new System.Drawing.Size(59, 17);
+            this.normalDeliveryCheckBox.TabIndex = 4;
+            this.normalDeliveryCheckBox.Text = "Normal";
+            this.normalDeliveryCheckBox.UseVisualStyleBackColor = true;
+            // 
             // customerPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -185,6 +258,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.productSearchListGridView)).EndInit();
             this.storesTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.shopListGridView)).EndInit();
+            this.cartTab.ResumeLayout(false);
+            this.cartTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cartDataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -203,5 +279,11 @@
         private System.Windows.Forms.TabPage profileTab;
         private System.Windows.Forms.TabPage cartTab;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.DataGridView cartDataGridView;
+        private System.Windows.Forms.Button updateCartButton;
+        private System.Windows.Forms.DataGridViewButtonColumn removeItemButton;
+        private System.Windows.Forms.Button purchaseButton;
+        private System.Windows.Forms.CheckBox normalDeliveryCheckBox;
+        private System.Windows.Forms.CheckBox fastDeliveryCheckBox;
     }
 }

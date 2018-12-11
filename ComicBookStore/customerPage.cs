@@ -72,6 +72,66 @@ namespace ComicBookStore
             
          
         }
+        //when pressed it fetches the current state of the cart table for the user
+        private void updateCartButton_Click(object sender, EventArgs e)
+        {
+            int custId = Int32.Parse(Form1.customerId);
+            string query = "select product.itemNum, product.productName, product.msrp from product inner join cart on product.itemNum=cart.itemNum where cart.customerId= "+ custId + "";
+            cartDataGridView.DataSource = searchResult.nPBindtoGridview(query);
+
+        }
+
+        //when pressed it deletes the top 1 column of cart where the item number is the one of the item in the rows cell
+        private void cartDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == cartDataGridView.Columns["removeItemButton"].Index) {
+
+                string query = "delete top (1) from cart where itemNum = '" + cartDataGridView.CurrentRow.Cells["itemNum"].Value.ToString() + "'";
+                searchResult.insertInto(query);
+
+            }
+        }
+
+        private void purchaseButton_Click(object sender, EventArgs e)
+        {
+
+            if (fastDeliveryCheckBox.Checked || normalDeliveryCheckBox.Checked)
+            {
+
+                int custId = Int32.Parse(Form1.customerId);
+                string addToOrderHistory = "insert into orderHistory(customerId, itemNum) select customerId, itemNum from cart where customerId ='" + custId + "'";
+                searchResult.insertInto(addToOrderHistory);
+                string deleteQuery = "delete from cart where customerId ='" + custId + "'";
+                searchResult.insertInto(deleteQuery);
+
+                int totalPaid = 0;
+                for (int i = 0; i < cartDataGridView.Rows.Count; i++)
+                {
+
+
+                    totalPaid += Convert.ToInt32(cartDataGridView.Rows[i].Cells["msrp"].Value);
+                }
+
+                if (fastDeliveryCheckBox.Checked)
+                {
+
+                    totalPaid += 5;
+
+                }
+
+                else if (normalDeliveryCheckBox.Checked)
+                {
+
+                    totalPaid += 1;
+                }
+
+                MessageBox.Show("You paid: " + totalPaid + "£");
+
+            }
+
+            else { MessageBox.Show("Please select delivery method"); }
+
+        }
     }
 
     static class searchResult
