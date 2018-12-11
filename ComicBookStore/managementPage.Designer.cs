@@ -41,6 +41,10 @@
             this.updateShopButton = new System.Windows.Forms.Button();
             this.updateCustButton = new System.Windows.Forms.Button();
             this.sendCustEditsButton = new System.Windows.Forms.Button();
+            this.ordersTab = new System.Windows.Forms.TabPage();
+            this.updateOrdersButton = new System.Windows.Forms.Button();
+            this.sendEditOrdersButton = new System.Windows.Forms.Button();
+            this.ordersDataGridView = new System.Windows.Forms.DataGridView();
             this.TabControl1.SuspendLayout();
             this.shopsTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.shopDataGridView)).BeginInit();
@@ -48,6 +52,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.prductsDataGridView)).BeginInit();
             this.customersTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.customersDataGridView)).BeginInit();
+            this.ordersTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ordersDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // TabControl1
@@ -55,6 +61,7 @@
             this.TabControl1.Controls.Add(this.shopsTabPage);
             this.TabControl1.Controls.Add(this.productTabPage);
             this.TabControl1.Controls.Add(this.customersTabPage);
+            this.TabControl1.Controls.Add(this.ordersTab);
             this.TabControl1.Location = new System.Drawing.Point(13, 13);
             this.TabControl1.Name = "TabControl1";
             this.TabControl1.SelectedIndex = 0;
@@ -184,6 +191,47 @@
             this.sendCustEditsButton.UseVisualStyleBackColor = true;
             this.sendCustEditsButton.Click += new System.EventHandler(this.sendCustEditsButton_Click);
             // 
+            // ordersTab
+            // 
+            this.ordersTab.Controls.Add(this.ordersDataGridView);
+            this.ordersTab.Controls.Add(this.sendEditOrdersButton);
+            this.ordersTab.Controls.Add(this.updateOrdersButton);
+            this.ordersTab.Location = new System.Drawing.Point(4, 22);
+            this.ordersTab.Name = "ordersTab";
+            this.ordersTab.Padding = new System.Windows.Forms.Padding(3);
+            this.ordersTab.Size = new System.Drawing.Size(675, 476);
+            this.ordersTab.TabIndex = 3;
+            this.ordersTab.Text = "Orders";
+            this.ordersTab.UseVisualStyleBackColor = true;
+            // 
+            // updateOrdersButton
+            // 
+            this.updateOrdersButton.Location = new System.Drawing.Point(573, 429);
+            this.updateOrdersButton.Name = "updateOrdersButton";
+            this.updateOrdersButton.Size = new System.Drawing.Size(96, 41);
+            this.updateOrdersButton.TabIndex = 0;
+            this.updateOrdersButton.Text = "Update Orders List";
+            this.updateOrdersButton.UseVisualStyleBackColor = true;
+            this.updateOrdersButton.Click += new System.EventHandler(this.updateOrdersButton_Click);
+            // 
+            // sendEditOrdersButton
+            // 
+            this.sendEditOrdersButton.Location = new System.Drawing.Point(486, 429);
+            this.sendEditOrdersButton.Name = "sendEditOrdersButton";
+            this.sendEditOrdersButton.Size = new System.Drawing.Size(81, 41);
+            this.sendEditOrdersButton.TabIndex = 1;
+            this.sendEditOrdersButton.Text = "Send Order Edits";
+            this.sendEditOrdersButton.UseVisualStyleBackColor = true;
+            this.sendEditOrdersButton.Click += new System.EventHandler(this.sendEditOrdersButton_Click);
+            // 
+            // ordersDataGridView
+            // 
+            this.ordersDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ordersDataGridView.Location = new System.Drawing.Point(7, 7);
+            this.ordersDataGridView.Name = "ordersDataGridView";
+            this.ordersDataGridView.Size = new System.Drawing.Size(662, 403);
+            this.ordersDataGridView.TabIndex = 2;
+            // 
             // managementPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -200,6 +248,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.prductsDataGridView)).EndInit();
             this.customersTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.customersDataGridView)).EndInit();
+            this.ordersTab.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ordersDataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -219,5 +269,9 @@
         private System.Windows.Forms.Button updateShopButton;
         private System.Windows.Forms.Button sendCustEditsButton;
         private System.Windows.Forms.Button updateCustButton;
+        private System.Windows.Forms.TabPage ordersTab;
+        private System.Windows.Forms.DataGridView ordersDataGridView;
+        private System.Windows.Forms.Button sendEditOrdersButton;
+        private System.Windows.Forms.Button updateOrdersButton;
     }
 }

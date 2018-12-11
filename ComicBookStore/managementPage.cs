@@ -60,7 +60,7 @@ namespace ComicBookStore
         //updateProdListButton
         private void button1_Click(object sender, EventArgs e)
         {
-            string query = "select * from product";
+            string query = "select product.itemNum, product.itemDesc, product.manufacturerDet, product.productName, product.stockNumber, product.stockStatus, category.catName, product.manName from product inner join  category on product.catId= category.catId";
             sDA = searchResult.getSqlDAdapter(query);
             dTable = new DataTable();
 
@@ -84,6 +84,26 @@ namespace ComicBookStore
         }
 
         private void sendCustEditsButton_Click(object sender, EventArgs e)
+        {
+            commandBuild = new SqlCommandBuilder(sDA);
+            sDA.Update(dTable);
+
+        }
+
+        private void updateOrdersButton_Click(object sender, EventArgs e)
+        {
+            string query = "select * from orderHistory";
+            sDA = searchResult.getSqlDAdapter(query);
+            dTable = new DataTable();
+
+            sDA.Fill(dTable);
+            bSource = new BindingSource();
+            bSource.DataSource = dTable;
+            ordersDataGridView.DataSource = bSource;
+
+        }
+
+        private void sendEditOrdersButton_Click(object sender, EventArgs e)
         {
             commandBuild = new SqlCommandBuilder(sDA);
             sDA.Update(dTable);

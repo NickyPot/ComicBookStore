@@ -19,15 +19,14 @@ namespace ComicBookStore
     public partial class customerPage : Form
     {
 
-        public string avatar;
+        public string avatar="";
         
         public customerPage()
         {
 
             InitializeComponent();
-
             int custId = Int32.Parse(Form1.customerId);
-            string query = "select customer.vipStatus, account.phoneNum, account.email, account.addressHome, account.avatar, names.firstName, names.secondName from customer inner join account on customer.customerID = account.personID inner join names on customer.customerID = names.customerId where customer.customerID =" + custId;
+            string query = "select customer.vipStatus, account.phoneNum, account.email, account.addressHome, account.avatar from customer inner join account on customer.customerID = account.personID where customer.customerID =" + custId;
             profileGridView.DataSource = searchResult.nPBindtoGridview(query);
             profileGridView.Columns["avatar"].Visible = false;
 
@@ -49,6 +48,7 @@ namespace ComicBookStore
 
                 avatarPictureBox.Image = Properties.Resources.spiderman;
             }
+
         }
 
         private void tabPage1_Click(object sender, EventArgs e)
@@ -113,6 +113,8 @@ namespace ComicBookStore
             string query = "insert into cart (customerId, itemNum) values('" + custId + "', '" + itemNum + "')";
 
             searchResult.insertInto(query);
+            string stockQuery = "update product set stockNumber = stockNumber -" + 1 + "where itemNum = '" + itemNum + "'";
+            searchResult.insertInto(stockQuery);
             MessageBox.Show("Item successfully added to your card");
             
          
@@ -134,49 +136,73 @@ namespace ComicBookStore
                 string query = "delete top (1) from cart where itemNum = '" + cartDataGridView.CurrentRow.Cells["itemNum"].Value.ToString() + "'";
                 searchResult.insertInto(query);
 
+                string stockQuery = "update product set stockNumber = stockNumber +" + 1 + "where itemNum = '" + cartDataGridView.CurrentRow.Cells["itemNum"].Value.ToString() + "'";
+                searchResult.insertInto(stockQuery);
+
+
+
             }
         }
 
         private void purchaseButton_Click(object sender, EventArgs e)
         {
-
-            if (fastDeliveryCheckBox.Checked || normalDeliveryCheckBox.Checked)
+            if (storeComboBox.Text != null)
             {
-
-                int custId = Int32.Parse(Form1.customerId);
-                string addToOrderHistory = "insert into orderHistory(customerId, itemNum) select customerId, itemNum from cart where customerId ='" + custId + "'";
-                searchResult.insertInto(addToOrderHistory);
-                string deleteQuery = "delete from cart where customerId ='" + custId + "'";
-                searchResult.insertInto(deleteQuery);
-
-                int totalPaid = 0;
-                for (int i = 0; i < cartDataGridView.Rows.Count; i++)
+                if (fastDeliveryCheckBox.Checked || normalDeliveryCheckBox.Checked)
                 {
 
+                    int custId = Int32.Parse(Form1.customerId);
+                    string addToOrderHistory = "insert into orderHistory(customerId, itemNum) select customerId, itemNum from cart where customerId ='" + custId + "'";
+                    searchResult.insertInto(addToOrderHistory);
+                    string deleteQuery = "delete from cart where customerId ='" + custId + "'";
+                    searchResult.insertInto(deleteQuery);
 
-                    totalPaid += Convert.ToInt32(cartDataGridView.Rows[i].Cells["msrp"].Value);
+                    int totalPaid = 0;
+                    for (int i = 0; i < cartDataGridView.Rows.Count; i++)
+                    {
+
+
+                        totalPaid += Convert.ToInt32(cartDataGridView.Rows[i].Cells["msrp"].Value);
+                    }
+
+                    if (fastDeliveryCheckBox.Checked)
+                    {
+
+                        totalPaid += 5;
+
+                    }
+
+                    else if (normalDeliveryCheckBox.Checked)
+                    {
+
+                        totalPaid += 1;
+                    }
+
+
+                    string stockQuery = "update customer set buyingStreak = buyingStreak +" + 1 + "where customerID = '" + custId + "'";
+                    searchResult.insertInto(stockQuery);
+                    MessageBox.Show(profileGridView.Rows[0].Cells["buyingStreak"].Value.ToString());
+                    if (Convert.ToInt32(profileGridView.Rows[0].Cells["buyingStreak"].Value) > 10)
+                    {
+
+                        string vipQuery = "update customer set vipStatus = 'yes' where customerID = '" + custId + "'";
+                        searchResult.insertInto(vipQuery);
+                        totalPaid = totalPaid - 2;
+                    }
+
+
+                    MessageBox.Show("You paid: " + totalPaid + "£");
+                    string revenueQuery = "update shop set revenue = revenue +" + totalPaid + "where name = '" + storeComboBox.Text + "'";
+                    searchResult.insertInto(revenueQuery);
+
+
+
+
                 }
 
-                if (fastDeliveryCheckBox.Checked)
-                {
-
-                    totalPaid += 5;
-
-                }
-
-                else if (normalDeliveryCheckBox.Checked)
-                {
-
-                    totalPaid += 1;
-                }
-
-                MessageBox.Show("You paid: " + totalPaid + "£");
-                string revenueQuery = "update shop set revenue = revenue +" + totalPaid+ "where name = '" + storeComboBox.Text + "'";
-                searchResult.insertInto(revenueQuery);
-
+                else { MessageBox.Show("Please select delivery method"); }
             }
-
-            else { MessageBox.Show("Please select delivery method"); }
+            else { MessageBox.Show("Please select a store"); }
 
         }
 
@@ -191,18 +217,18 @@ namespace ComicBookStore
 
 
             int custId = Int32.Parse(Form1.customerId);
-            string query = "select customer.vipStatus, account.phoneNum, account.email, account.addressHome, account.avatar, names.firstName, names.secondName from customer inner join account on customer.customerID = account.personID inner join names on customer.customerID = names.customerId where customer.customerID =" + custId;
+            string query = "select customer.vipStatus, customer.buyingStreak, account.phoneNum, account.email, account.addressHome, account.avatar, names.firstName, names.secondName from customer inner join account on customer.customerID = account.personID inner join names on customer.customerID = names.customerId where customer.customerID ='" + custId.ToString()+"'";
             profileGridView.DataSource = searchResult.nPBindtoGridview(query);
             profileGridView.Columns["avatar"].Visible = false;
-
+            MessageBox.Show(custId.ToString());
             avatar = profileGridView.Rows[0].Cells["avatar"].Value.ToString();
             if (profileGridView.Rows[0].Cells["avatar"].Value.ToString() == "batman") {
-
+  
                 avatarPictureBox.Image = Properties.Resources.batman;
             }
-
+      
             else if (profileGridView.Rows[0].Cells["avatar"].Value.ToString() == "superman") {
-
+        
                 avatarPictureBox.Image = Properties.Resources.superman;
             }
     
@@ -219,6 +245,11 @@ namespace ComicBookStore
         }
 
         private void avatarPictureBox_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void profileGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

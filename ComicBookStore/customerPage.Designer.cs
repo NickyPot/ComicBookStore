@@ -30,6 +30,8 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.productsTab = new System.Windows.Forms.TabPage();
+            this.adLabel = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
             this.productSearchListGridView = new System.Windows.Forms.DataGridView();
             this.button2 = new System.Windows.Forms.Button();
             this.productTextBox = new System.Windows.Forms.TextBox();
@@ -38,29 +40,27 @@
             this.button1 = new System.Windows.Forms.Button();
             this.shopListGridView = new System.Windows.Forms.DataGridView();
             this.profileTab = new System.Windows.Forms.TabPage();
+            this.avatarPictureBox = new System.Windows.Forms.PictureBox();
+            this.updateProfileTableButton = new System.Windows.Forms.Button();
+            this.profileGridView = new System.Windows.Forms.DataGridView();
             this.cartTab = new System.Windows.Forms.TabPage();
-            this.button3 = new System.Windows.Forms.Button();
-            this.updateCartButton = new System.Windows.Forms.Button();
+            this.storeComboBox = new System.Windows.Forms.ComboBox();
+            this.normalDeliveryCheckBox = new System.Windows.Forms.CheckBox();
+            this.fastDeliveryCheckBox = new System.Windows.Forms.CheckBox();
+            this.purchaseButton = new System.Windows.Forms.Button();
             this.cartDataGridView = new System.Windows.Forms.DataGridView();
             this.removeItemButton = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.purchaseButton = new System.Windows.Forms.Button();
-            this.fastDeliveryCheckBox = new System.Windows.Forms.CheckBox();
-            this.normalDeliveryCheckBox = new System.Windows.Forms.CheckBox();
-            this.profileGridView = new System.Windows.Forms.DataGridView();
-            this.updateProfileTableButton = new System.Windows.Forms.Button();
-            this.avatarPictureBox = new System.Windows.Forms.PictureBox();
-            this.adLabel = new System.Windows.Forms.Label();
-            this.storeComboBox = new System.Windows.Forms.ComboBox();
+            this.updateCartButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.productsTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.productSearchListGridView)).BeginInit();
             this.storesTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.shopListGridView)).BeginInit();
             this.profileTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.avatarPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.profileGridView)).BeginInit();
             this.cartTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cartDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.profileGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.avatarPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -91,6 +91,24 @@
             this.productsTab.Text = "Products";
             this.productsTab.UseVisualStyleBackColor = true;
             this.productsTab.Click += new System.EventHandler(this.Products_Click);
+            // 
+            // adLabel
+            // 
+            this.adLabel.AutoSize = true;
+            this.adLabel.Location = new System.Drawing.Point(10, 233);
+            this.adLabel.Name = "adLabel";
+            this.adLabel.Size = new System.Drawing.Size(0, 13);
+            this.adLabel.TabIndex = 5;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(366, 93);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(82, 71);
+            this.button3.TabIndex = 4;
+            this.button3.Text = "Add to Cart";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // productSearchListGridView
             // 
@@ -172,6 +190,34 @@
             this.profileTab.UseVisualStyleBackColor = true;
             this.profileTab.Click += new System.EventHandler(this.profileTab_Click);
             // 
+            // avatarPictureBox
+            // 
+            this.avatarPictureBox.Location = new System.Drawing.Point(7, 156);
+            this.avatarPictureBox.Name = "avatarPictureBox";
+            this.avatarPictureBox.Size = new System.Drawing.Size(150, 150);
+            this.avatarPictureBox.TabIndex = 2;
+            this.avatarPictureBox.TabStop = false;
+            this.avatarPictureBox.Click += new System.EventHandler(this.avatarPictureBox_Click);
+            // 
+            // updateProfileTableButton
+            // 
+            this.updateProfileTableButton.Location = new System.Drawing.Point(429, 274);
+            this.updateProfileTableButton.Name = "updateProfileTableButton";
+            this.updateProfileTableButton.Size = new System.Drawing.Size(111, 28);
+            this.updateProfileTableButton.TabIndex = 1;
+            this.updateProfileTableButton.Text = "update profile table";
+            this.updateProfileTableButton.UseVisualStyleBackColor = true;
+            this.updateProfileTableButton.Click += new System.EventHandler(this.updateProfileTableButton_Click);
+            // 
+            // profileGridView
+            // 
+            this.profileGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.profileGridView.Location = new System.Drawing.Point(6, 6);
+            this.profileGridView.Name = "profileGridView";
+            this.profileGridView.Size = new System.Drawing.Size(535, 143);
+            this.profileGridView.TabIndex = 0;
+            this.profileGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.profileGridView_CellContentClick);
+            // 
             // cartTab
             // 
             this.cartTab.Controls.Add(this.storeComboBox);
@@ -188,25 +234,46 @@
             this.cartTab.Text = "Cart";
             this.cartTab.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // storeComboBox
             // 
-            this.button3.Location = new System.Drawing.Point(366, 93);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(82, 71);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "Add to Cart";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.storeComboBox.FormattingEnabled = true;
+            this.storeComboBox.Items.AddRange(new object[] {
+            "Dundee",
+            "Edinburgh"});
+            this.storeComboBox.Location = new System.Drawing.Point(23, 254);
+            this.storeComboBox.Name = "storeComboBox";
+            this.storeComboBox.Size = new System.Drawing.Size(121, 21);
+            this.storeComboBox.TabIndex = 5;
             // 
-            // updateCartButton
+            // normalDeliveryCheckBox
             // 
-            this.updateCartButton.Location = new System.Drawing.Point(452, 254);
-            this.updateCartButton.Name = "updateCartButton";
-            this.updateCartButton.Size = new System.Drawing.Size(89, 48);
-            this.updateCartButton.TabIndex = 0;
-            this.updateCartButton.Text = "Update Cart";
-            this.updateCartButton.UseVisualStyleBackColor = true;
-            this.updateCartButton.Click += new System.EventHandler(this.updateCartButton_Click);
+            this.normalDeliveryCheckBox.AutoSize = true;
+            this.normalDeliveryCheckBox.Location = new System.Drawing.Point(204, 284);
+            this.normalDeliveryCheckBox.Name = "normalDeliveryCheckBox";
+            this.normalDeliveryCheckBox.Size = new System.Drawing.Size(59, 17);
+            this.normalDeliveryCheckBox.TabIndex = 4;
+            this.normalDeliveryCheckBox.Text = "Normal";
+            this.normalDeliveryCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // fastDeliveryCheckBox
+            // 
+            this.fastDeliveryCheckBox.AutoSize = true;
+            this.fastDeliveryCheckBox.Location = new System.Drawing.Point(204, 254);
+            this.fastDeliveryCheckBox.Name = "fastDeliveryCheckBox";
+            this.fastDeliveryCheckBox.Size = new System.Drawing.Size(87, 17);
+            this.fastDeliveryCheckBox.TabIndex = 3;
+            this.fastDeliveryCheckBox.Text = "Fast Delivery";
+            this.fastDeliveryCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // purchaseButton
+            // 
+            this.purchaseButton.Location = new System.Drawing.Point(347, 254);
+            this.purchaseButton.Name = "purchaseButton";
+            this.purchaseButton.Size = new System.Drawing.Size(99, 48);
+            this.purchaseButton.TabIndex = 2;
+            this.purchaseButton.Text = "Purchase";
+            this.purchaseButton.UseVisualStyleBackColor = true;
+            this.purchaseButton.Click += new System.EventHandler(this.purchaseButton_Click);
             // 
             // cartDataGridView
             // 
@@ -228,81 +295,15 @@
             this.removeItemButton.Text = "Remove Item";
             this.removeItemButton.UseColumnTextForButtonValue = true;
             // 
-            // purchaseButton
+            // updateCartButton
             // 
-            this.purchaseButton.Location = new System.Drawing.Point(347, 254);
-            this.purchaseButton.Name = "purchaseButton";
-            this.purchaseButton.Size = new System.Drawing.Size(99, 48);
-            this.purchaseButton.TabIndex = 2;
-            this.purchaseButton.Text = "Purchase";
-            this.purchaseButton.UseVisualStyleBackColor = true;
-            this.purchaseButton.Click += new System.EventHandler(this.purchaseButton_Click);
-            // 
-            // fastDeliveryCheckBox
-            // 
-            this.fastDeliveryCheckBox.AutoSize = true;
-            this.fastDeliveryCheckBox.Location = new System.Drawing.Point(204, 254);
-            this.fastDeliveryCheckBox.Name = "fastDeliveryCheckBox";
-            this.fastDeliveryCheckBox.Size = new System.Drawing.Size(87, 17);
-            this.fastDeliveryCheckBox.TabIndex = 3;
-            this.fastDeliveryCheckBox.Text = "Fast Delivery";
-            this.fastDeliveryCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // normalDeliveryCheckBox
-            // 
-            this.normalDeliveryCheckBox.AutoSize = true;
-            this.normalDeliveryCheckBox.Location = new System.Drawing.Point(204, 284);
-            this.normalDeliveryCheckBox.Name = "normalDeliveryCheckBox";
-            this.normalDeliveryCheckBox.Size = new System.Drawing.Size(59, 17);
-            this.normalDeliveryCheckBox.TabIndex = 4;
-            this.normalDeliveryCheckBox.Text = "Normal";
-            this.normalDeliveryCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // profileGridView
-            // 
-            this.profileGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.profileGridView.Location = new System.Drawing.Point(6, 6);
-            this.profileGridView.Name = "profileGridView";
-            this.profileGridView.Size = new System.Drawing.Size(535, 143);
-            this.profileGridView.TabIndex = 0;
-            // 
-            // updateProfileTableButton
-            // 
-            this.updateProfileTableButton.Location = new System.Drawing.Point(429, 274);
-            this.updateProfileTableButton.Name = "updateProfileTableButton";
-            this.updateProfileTableButton.Size = new System.Drawing.Size(111, 28);
-            this.updateProfileTableButton.TabIndex = 1;
-            this.updateProfileTableButton.Text = "update profile table";
-            this.updateProfileTableButton.UseVisualStyleBackColor = true;
-            this.updateProfileTableButton.Click += new System.EventHandler(this.updateProfileTableButton_Click);
-            // 
-            // avatarPictureBox
-            // 
-            this.avatarPictureBox.Location = new System.Drawing.Point(7, 156);
-            this.avatarPictureBox.Name = "avatarPictureBox";
-            this.avatarPictureBox.Size = new System.Drawing.Size(150, 150);
-            this.avatarPictureBox.TabIndex = 2;
-            this.avatarPictureBox.TabStop = false;
-            this.avatarPictureBox.Click += new System.EventHandler(this.avatarPictureBox_Click);
-            // 
-            // adLabel
-            // 
-            this.adLabel.AutoSize = true;
-            this.adLabel.Location = new System.Drawing.Point(10, 233);
-            this.adLabel.Name = "adLabel";
-            this.adLabel.Size = new System.Drawing.Size(0, 13);
-            this.adLabel.TabIndex = 5;
-            // 
-            // storeComboBox
-            // 
-            this.storeComboBox.FormattingEnabled = true;
-            this.storeComboBox.Items.AddRange(new object[] {
-            "Dundee",
-            "Edinburgh"});
-            this.storeComboBox.Location = new System.Drawing.Point(23, 254);
-            this.storeComboBox.Name = "storeComboBox";
-            this.storeComboBox.Size = new System.Drawing.Size(121, 21);
-            this.storeComboBox.TabIndex = 5;
+            this.updateCartButton.Location = new System.Drawing.Point(452, 254);
+            this.updateCartButton.Name = "updateCartButton";
+            this.updateCartButton.Size = new System.Drawing.Size(89, 48);
+            this.updateCartButton.TabIndex = 0;
+            this.updateCartButton.Text = "Update Cart";
+            this.updateCartButton.UseVisualStyleBackColor = true;
+            this.updateCartButton.Click += new System.EventHandler(this.updateCartButton_Click);
             // 
             // customerPage
             // 
@@ -319,11 +320,11 @@
             this.storesTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.shopListGridView)).EndInit();
             this.profileTab.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.avatarPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.profileGridView)).EndInit();
             this.cartTab.ResumeLayout(false);
             this.cartTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cartDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.profileGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.avatarPictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }

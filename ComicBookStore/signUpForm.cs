@@ -32,75 +32,100 @@ namespace ComicBookStore
                 conn = new SqlConnection(connString);
                 conn.Open();
 
-                string insert= "insert into customer (vipStatus) values ('no')";
-                string count = "SELECT COUNT(vipStatus) from customer";
-                SqlCommand command = new SqlCommand(insert, conn);
-                command.ExecuteNonQuery();
-                
-                SqlCommand countCommand = new SqlCommand(count, conn);
-                SqlDataReader reader = countCommand.ExecuteReader();
-               
-                reader.Read();
-                string accountId = reader[0].ToString();
-                reader.Close();
-
-                string img;
-                if (batmanCheckBox1.Checked)
+                SqlCommand prepCommandCompare = new SqlCommand(null, conn);
+                prepCommandCompare.CommandText = "select * from account where email = @email";
+                SqlParameter emailParamCom = new SqlParameter("@email", SqlDbType.VarChar, 100);
+                emailParamCom.Value = emailTextBox.Text;
+                prepCommandCompare.Parameters.Add(emailParamCom);
+                prepCommandCompare.Prepare();
+                SqlDataReader dataComp = prepCommandCompare.ExecuteReader();
+                int existAcc = 0;
+                while (dataComp.Read()) {
+                    existAcc++;
+                }
+                dataComp.Close();
+                if (existAcc == 0)
                 {
 
-                    img = "batman";
+
+                    string insert = "insert into customer (vipStatus) values ('no')";
+                    string count = "SELECT COUNT(vipStatus) from customer";
+                    SqlCommand command = new SqlCommand(insert, conn);
+                    command.ExecuteNonQuery();
+
+                    SqlCommand countCommand = new SqlCommand(count, conn);
+                    SqlDataReader reader = countCommand.ExecuteReader();
+
+                    reader.Read();
+                    string accountId = reader[0].ToString();
+                    reader.Close();
+
+                    string img;
+                    if (batmanCheckBox1.Checked)
+                    {
+
+                        img = "batman";
+
+                    }
+
+                    else if (supermanCheckBox2.Checked)
+                    {
+
+                        img = "superman";
+
+                    }
+
+                    else if (spidermanCheckBox3.Checked)
+                    {
+
+                        img = "spiderman";
+                    }
+
+                    else
+                    {
+                        img = "no img";
+                    }
+
+
+
+                    SqlCommand preparedCommand = new SqlCommand(null, conn);
+                    preparedCommand.CommandText = "insert into account (phoneNum, email, addressHome, avatar, personID, password)" + "values (@phoneNum, @email, @addressHome, @avatar, @personID, @password)";
+                    SqlParameter phoneNumParam = new SqlParameter("@phoneNum", SqlDbType.VarChar, 10);
+                    SqlParameter emailParam = new SqlParameter("@email", SqlDbType.VarChar, 100);
+                    SqlParameter addressHomeParam = new SqlParameter("@addressHome", SqlDbType.VarChar, 100);
+                    SqlParameter avatarParam = new SqlParameter("@avatar", SqlDbType.VarChar, 50);
+                    SqlParameter personIDParam = new SqlParameter("@personID", SqlDbType.Int, 0);
+                    SqlParameter passwordParam = new SqlParameter("@password", SqlDbType.VarChar, 200);
+
+                    int hashedPassword = passwordTextBox.Text.GetHashCode();
+                    string saltedPassword = hashedPassword.ToString() + "asdfasd";
+
+                    phoneNumParam.Value = phoneNumTextBox.Text;
+                    emailParam.Value = emailTextBox.Text;
+                    addressHomeParam.Value = homeAddressTextBox.Text;
+                    avatarParam.Value = img;
+                    personIDParam.Value = accountId;
+                    passwordParam.Value = saltedPassword;
+
+                    preparedCommand.Parameters.Add(phoneNumParam);
+                    preparedCommand.Parameters.Add(emailParam);
+                    preparedCommand.Parameters.Add(addressHomeParam);
+                    preparedCommand.Parameters.Add(avatarParam);
+                    preparedCommand.Parameters.Add(personIDParam);
+                    preparedCommand.Parameters.Add(passwordParam);
+
+                    preparedCommand.Prepare();
+                    preparedCommand.ExecuteNonQuery();
+
+
+
+
+                    MessageBox.Show("success");
+
 
                 }
 
-                else if (supermanCheckBox2.Checked)
-                {
-
-                    img = "superman";
-
-                }
-
-                else if (spidermanCheckBox3.Checked)
-                {
-
-                    img = "spiderman";
-                }
-
-                else
-                {
-                    img = "no img";
-                }
-
-
-                SqlCommand preparedCommand = new SqlCommand(null, conn);
-                preparedCommand.CommandText = "insert into account (phoneNum, email, addressHome, avatar, personID, password)" + "values (@phoneNum, @email, @addressHome, @avatar, @personID, @password)";
-                SqlParameter phoneNumParam = new SqlParameter("@phoneNum", SqlDbType.VarChar, 10);
-                SqlParameter emailParam = new SqlParameter("@email", SqlDbType.VarChar, 100);
-                SqlParameter addressHomeParam = new SqlParameter("@addressHome", SqlDbType.VarChar, 100);
-                SqlParameter avatarParam = new SqlParameter("@avatar", SqlDbType.VarChar, 50);
-                SqlParameter personIDParam = new SqlParameter("@personID", SqlDbType.Int, 0);
-                SqlParameter passwordParam = new SqlParameter("@password", SqlDbType.VarChar, 200);
-               
-
-                phoneNumParam.Value = phoneNumTextBox.Text;
-                emailParam.Value = emailTextBox.Text;
-                addressHomeParam.Value = homeAddressTextBox.Text;
-                avatarParam.Value = img;
-                personIDParam.Value = accountId;
-                passwordParam.Value = passwordTextBox.Text;
-
-                preparedCommand.Parameters.Add(phoneNumParam);
-                preparedCommand.Parameters.Add(emailParam);
-                preparedCommand.Parameters.Add(addressHomeParam);
-                preparedCommand.Parameters.Add(avatarParam);
-                preparedCommand.Parameters.Add(personIDParam);
-                preparedCommand.Parameters.Add(passwordParam);
-
-                preparedCommand.Prepare();
-                preparedCommand.ExecuteNonQuery();
-                
-
-
-                MessageBox.Show("success");
+                else { MessageBox.Show("Account with that email already exists"); }
 
 
             }

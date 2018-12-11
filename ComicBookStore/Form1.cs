@@ -52,8 +52,7 @@ namespace ComicBookStore
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (!(emailTextBox.Text == string.Empty) && !(passwordTextBox.Text == string.Empty)) {
-
+             if (!(emailTextBox.Text == string.Empty) && !(passwordTextBox.Text == string.Empty)) {
 
                 SqlConnection conn;
                 string connString = "Data Source =tolmount.abertay.ac.uk; Initial Catalog =sql1704807; User ID = sql1704807; Password =2h19%7nE";
@@ -61,13 +60,26 @@ namespace ComicBookStore
                 conn = new SqlConnection(connString);
                 conn.Open(); 
 
-                string selectAcc = "select * from account where email = '" + emailTextBox.Text + "'and password = '" + passwordTextBox.Text + "'";
+                
 
-                SqlCommand command = new SqlCommand(selectAcc);
+                SqlCommand prepCommand = new SqlCommand(null, conn);
+                prepCommand.CommandText = "select * from account where email = @email and password = @password";
+                SqlParameter emailParam = new SqlParameter("@email", SqlDbType.VarChar, 100);
+                SqlParameter passwordParam = new SqlParameter("@password", SqlDbType.VarChar, 200);
 
-                command.Connection = conn;
+                int hashedPassword = passwordTextBox.Text.GetHashCode();
+                string saltedPassword = hashedPassword.ToString() + "asdfasd";
 
-                SqlDataReader data = command.ExecuteReader();
+                emailParam.Value = emailTextBox.Text;
+                passwordParam.Value = saltedPassword;
+
+                prepCommand.Parameters.Add(emailParam);
+                prepCommand.Parameters.Add(passwordParam);
+
+                prepCommand.Prepare();
+               SqlDataReader data = prepCommand.ExecuteReader();
+
+
                 int accounts=0;
                 int staff = 0;
                 while (data.Read()) {
@@ -133,7 +145,7 @@ namespace ComicBookStore
                         userIdData.Read();
                         _customerId = userIdData[0].ToString();
                        
-                       // MessageBox.Show(userIdData[0].ToString());
+                        MessageBox.Show(userIdData[0].ToString());
 
                         customerPage customerPage = new customerPage();
                         customerPage.Show();
