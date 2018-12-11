@@ -18,11 +18,37 @@ namespace ComicBookStore
     
     public partial class customerPage : Form
     {
+
+        public string avatar;
         
         public customerPage()
         {
 
             InitializeComponent();
+
+            int custId = Int32.Parse(Form1.customerId);
+            string query = "select customer.vipStatus, account.phoneNum, account.email, account.addressHome, account.avatar, names.firstName, names.secondName from customer inner join account on customer.customerID = account.personID inner join names on customer.customerID = names.customerId where customer.customerID =" + custId;
+            profileGridView.DataSource = searchResult.nPBindtoGridview(query);
+            profileGridView.Columns["avatar"].Visible = false;
+
+            avatar = profileGridView.Rows[0].Cells["avatar"].Value.ToString();
+            if (profileGridView.Rows[0].Cells["avatar"].Value.ToString() == "batman")
+            {
+
+                avatarPictureBox.Image = Properties.Resources.batman;
+            }
+
+            else if (profileGridView.Rows[0].Cells["avatar"].Value.ToString() == "superman")
+            {
+
+                avatarPictureBox.Image = Properties.Resources.superman;
+            }
+
+            else if (profileGridView.Rows[0].Cells["avatar"].Value.ToString() == "spiderman")
+            {
+
+                avatarPictureBox.Image = Properties.Resources.spiderman;
+            }
         }
 
         private void tabPage1_Click(object sender, EventArgs e)
@@ -54,6 +80,25 @@ namespace ComicBookStore
             
             string query = "select * from prouct where ";
             productSearchListGridView.DataSource = searchResult.pBindToGridView(query, productTextBox.Text);
+
+            if (avatar == "batman")
+            {
+
+                adLabel.Text = "Batman new 52 issue 199 coming next week!";
+            }
+
+            else if (avatar == "superman") {
+
+                adLabel.Text = "Superman new 52 issue 199 coming next week!";
+
+            }
+            else if (avatar == "spiderman")
+            {
+
+                adLabel.Text = "New spiderman figure coming next week!";
+
+            }
+
         }
 
         //add to cart button
@@ -126,16 +171,74 @@ namespace ComicBookStore
                 }
 
                 MessageBox.Show("You paid: " + totalPaid + "£");
+                string revenueQuery = "update shop set revenue = revenue +" + totalPaid+ "where name = '" + storeComboBox.Text + "'";
+                searchResult.insertInto(revenueQuery);
 
             }
 
             else { MessageBox.Show("Please select delivery method"); }
 
         }
+
+        private void profileTab_Click(object sender, EventArgs e)
+        {
+            
+
+        }
+
+        private void updateProfileTableButton_Click(object sender, EventArgs e)
+        {
+
+
+            int custId = Int32.Parse(Form1.customerId);
+            string query = "select customer.vipStatus, account.phoneNum, account.email, account.addressHome, account.avatar, names.firstName, names.secondName from customer inner join account on customer.customerID = account.personID inner join names on customer.customerID = names.customerId where customer.customerID =" + custId;
+            profileGridView.DataSource = searchResult.nPBindtoGridview(query);
+            profileGridView.Columns["avatar"].Visible = false;
+
+            avatar = profileGridView.Rows[0].Cells["avatar"].Value.ToString();
+            if (profileGridView.Rows[0].Cells["avatar"].Value.ToString() == "batman") {
+
+                avatarPictureBox.Image = Properties.Resources.batman;
+            }
+
+            else if (profileGridView.Rows[0].Cells["avatar"].Value.ToString() == "superman") {
+
+                avatarPictureBox.Image = Properties.Resources.superman;
+            }
+    
+            else if (profileGridView.Rows[0].Cells["avatar"].Value.ToString() == "spiderman")
+            {
+        
+                avatarPictureBox.Image = Properties.Resources.spiderman;
+            }
+
+
+
+
+
+        }
+
+        private void avatarPictureBox_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
     static class searchResult
     {
+
+        public static SqlDataAdapter getSqlDAdapter(string query) {
+
+            SqlConnection conn;
+            string connString = "Data Source =tolmount.abertay.ac.uk; Initial Catalog =sql1704807; User ID = sql1704807; Password =2h19%7nE";
+
+            conn = new SqlConnection(connString);
+            conn.Open();
+
+            SqlDataAdapter dA = new SqlDataAdapter(query, conn);
+            return dA;
+        }
+        
         //not prepared
         public static DataTable nPBindtoGridview(string query)
         {

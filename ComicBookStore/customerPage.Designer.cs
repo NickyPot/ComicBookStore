@@ -46,13 +46,21 @@
             this.purchaseButton = new System.Windows.Forms.Button();
             this.fastDeliveryCheckBox = new System.Windows.Forms.CheckBox();
             this.normalDeliveryCheckBox = new System.Windows.Forms.CheckBox();
+            this.profileGridView = new System.Windows.Forms.DataGridView();
+            this.updateProfileTableButton = new System.Windows.Forms.Button();
+            this.avatarPictureBox = new System.Windows.Forms.PictureBox();
+            this.adLabel = new System.Windows.Forms.Label();
+            this.storeComboBox = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.productsTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.productSearchListGridView)).BeginInit();
             this.storesTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.shopListGridView)).BeginInit();
+            this.profileTab.SuspendLayout();
             this.cartTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cartDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.profileGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.avatarPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -69,6 +77,7 @@
             // 
             // productsTab
             // 
+            this.productsTab.Controls.Add(this.adLabel);
             this.productsTab.Controls.Add(this.button3);
             this.productsTab.Controls.Add(this.productSearchListGridView);
             this.productsTab.Controls.Add(this.button2);
@@ -151,6 +160,9 @@
             // 
             // profileTab
             // 
+            this.profileTab.Controls.Add(this.avatarPictureBox);
+            this.profileTab.Controls.Add(this.updateProfileTableButton);
+            this.profileTab.Controls.Add(this.profileGridView);
             this.profileTab.Location = new System.Drawing.Point(4, 22);
             this.profileTab.Name = "profileTab";
             this.profileTab.Padding = new System.Windows.Forms.Padding(3);
@@ -158,9 +170,11 @@
             this.profileTab.TabIndex = 2;
             this.profileTab.Text = "Profile";
             this.profileTab.UseVisualStyleBackColor = true;
+            this.profileTab.Click += new System.EventHandler(this.profileTab_Click);
             // 
             // cartTab
             // 
+            this.cartTab.Controls.Add(this.storeComboBox);
             this.cartTab.Controls.Add(this.normalDeliveryCheckBox);
             this.cartTab.Controls.Add(this.fastDeliveryCheckBox);
             this.cartTab.Controls.Add(this.purchaseButton);
@@ -244,6 +258,52 @@
             this.normalDeliveryCheckBox.Text = "Normal";
             this.normalDeliveryCheckBox.UseVisualStyleBackColor = true;
             // 
+            // profileGridView
+            // 
+            this.profileGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.profileGridView.Location = new System.Drawing.Point(6, 6);
+            this.profileGridView.Name = "profileGridView";
+            this.profileGridView.Size = new System.Drawing.Size(535, 143);
+            this.profileGridView.TabIndex = 0;
+            // 
+            // updateProfileTableButton
+            // 
+            this.updateProfileTableButton.Location = new System.Drawing.Point(429, 274);
+            this.updateProfileTableButton.Name = "updateProfileTableButton";
+            this.updateProfileTableButton.Size = new System.Drawing.Size(111, 28);
+            this.updateProfileTableButton.TabIndex = 1;
+            this.updateProfileTableButton.Text = "update profile table";
+            this.updateProfileTableButton.UseVisualStyleBackColor = true;
+            this.updateProfileTableButton.Click += new System.EventHandler(this.updateProfileTableButton_Click);
+            // 
+            // avatarPictureBox
+            // 
+            this.avatarPictureBox.Location = new System.Drawing.Point(7, 156);
+            this.avatarPictureBox.Name = "avatarPictureBox";
+            this.avatarPictureBox.Size = new System.Drawing.Size(150, 150);
+            this.avatarPictureBox.TabIndex = 2;
+            this.avatarPictureBox.TabStop = false;
+            this.avatarPictureBox.Click += new System.EventHandler(this.avatarPictureBox_Click);
+            // 
+            // adLabel
+            // 
+            this.adLabel.AutoSize = true;
+            this.adLabel.Location = new System.Drawing.Point(10, 233);
+            this.adLabel.Name = "adLabel";
+            this.adLabel.Size = new System.Drawing.Size(0, 13);
+            this.adLabel.TabIndex = 5;
+            // 
+            // storeComboBox
+            // 
+            this.storeComboBox.FormattingEnabled = true;
+            this.storeComboBox.Items.AddRange(new object[] {
+            "Dundee",
+            "Edinburgh"});
+            this.storeComboBox.Location = new System.Drawing.Point(23, 254);
+            this.storeComboBox.Name = "storeComboBox";
+            this.storeComboBox.Size = new System.Drawing.Size(121, 21);
+            this.storeComboBox.TabIndex = 5;
+            // 
             // customerPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -258,9 +318,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.productSearchListGridView)).EndInit();
             this.storesTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.shopListGridView)).EndInit();
+            this.profileTab.ResumeLayout(false);
             this.cartTab.ResumeLayout(false);
             this.cartTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cartDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.profileGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.avatarPictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -285,5 +348,10 @@
         private System.Windows.Forms.Button purchaseButton;
         private System.Windows.Forms.CheckBox normalDeliveryCheckBox;
         private System.Windows.Forms.CheckBox fastDeliveryCheckBox;
+        private System.Windows.Forms.DataGridView profileGridView;
+        private System.Windows.Forms.Button updateProfileTableButton;
+        private System.Windows.Forms.PictureBox avatarPictureBox;
+        private System.Windows.Forms.Label adLabel;
+        private System.Windows.Forms.ComboBox storeComboBox;
     }
 }

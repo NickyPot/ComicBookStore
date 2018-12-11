@@ -13,17 +13,29 @@ using System.Data.SqlTypes;
 
 namespace ComicBookStore
 {
-    public partial class staffPage : Form
+    public partial class managementPage : Form
     {
-       
+
         DataTable dTable = null;
         BindingSource bSource = null;
         SqlDataAdapter sDA = null;
         SqlCommandBuilder commandBuild;
 
-        public staffPage()
+
+        public managementPage()
         {
             InitializeComponent();
+        }
+
+        private void managementPage_Load(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void sendShopButton_Click(object sender, EventArgs e)
+        {
+            commandBuild = new SqlCommandBuilder(sDA);
+            sDA.Update(dTable);
         }
 
         private void updateShopButton_Click(object sender, EventArgs e)
@@ -31,20 +43,22 @@ namespace ComicBookStore
             string query = "select * from shop";
             sDA = searchResult.getSqlDAdapter(query);
             dTable = new DataTable();
-           
+
             sDA.Fill(dTable);
             bSource = new BindingSource();
             bSource.DataSource = dTable;
-            shopsGridView.DataSource = bSource;
+            shopDataGridView.DataSource = bSource;
         }
 
-        private void sendEditsButton_Click(object sender, EventArgs e)
+        //sendEditProdButton
+        private void button2_Click(object sender, EventArgs e)
         {
             commandBuild = new SqlCommandBuilder(sDA);
             sDA.Update(dTable);
         }
 
-        private void upProductButton_Click(object sender, EventArgs e)
+        //updateProdListButton
+        private void button1_Click(object sender, EventArgs e)
         {
             string query = "select * from product";
             sDA = searchResult.getSqlDAdapter(query);
@@ -53,19 +67,27 @@ namespace ComicBookStore
             sDA.Fill(dTable);
             bSource = new BindingSource();
             bSource.DataSource = dTable;
-            productListGridView.DataSource = bSource;
+            prductsDataGridView.DataSource = bSource;
         }
 
-        private void sendProdEditButton_Click(object sender, EventArgs e)
+        private void updateCustButton_Click(object sender, EventArgs e)
+        {
+            string query = "select * from customer";
+            sDA = searchResult.getSqlDAdapter(query);
+            dTable = new DataTable();
+
+            sDA.Fill(dTable);
+            bSource = new BindingSource();
+            bSource.DataSource = dTable;
+            customersDataGridView.DataSource = bSource;
+
+        }
+
+        private void sendCustEditsButton_Click(object sender, EventArgs e)
         {
             commandBuild = new SqlCommandBuilder(sDA);
             sDA.Update(dTable);
-        }
-
-        private void shopsGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
 
         }
     }
-    }
-
+}

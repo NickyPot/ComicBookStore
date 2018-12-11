@@ -80,7 +80,7 @@ namespace ComicBookStore
                 {
                     
 
-                    string selectStaff = "select * from account where email = '" + emailTextBox.Text + "'and staffId is not null";
+                    string selectStaff = "select staffId from account where email = '" + emailTextBox.Text + "'and staffId is not null";
 
                     SqlCommand command1 = new SqlCommand(selectStaff);
 
@@ -88,16 +88,36 @@ namespace ComicBookStore
 
                     SqlDataReader data1 = command1.ExecuteReader();
 
+                    string staffId ="";
                     while (data1.Read())
                     {
                         staff++;
+                        staffId = data1[0].ToString();
                     }
 
+                    
                     data1.Close();
+
+
                     if (staff == 1)
                     {
                         //if it comes here it means they are staff
-                        MessageBox.Show("You are staff");
+                       // MessageBox.Show("You are staff");
+                        string selectManagement = "select managementStatus from staff where staffId = " + staffId;
+                        string management = searchResult.nPBindtoGridview(selectManagement).Rows[0]["managementStatus"].ToString();
+                        
+                        if (management == "yes")
+                        {
+
+                            managementPage managPage = new managementPage();
+                            managPage.Show();
+                        }
+
+                        else {
+                            staffPage staffPage = new staffPage();
+                            staffPage.Show();    
+
+                        }
 
                     }
 
